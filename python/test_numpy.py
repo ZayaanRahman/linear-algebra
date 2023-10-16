@@ -1,7 +1,6 @@
 import time
 import random
-
-from linear_algebra import mult
+import numpy as np
 
 
 def main():
@@ -12,16 +11,19 @@ def main():
 
     n = 5
 
-    result = [0] * (n * n)
+    result = np.zeros((n, n), dtype=float)
 
     for _ in range(100):
-        # Generate random matrices, ensures only ints but stored as float
-        a = [float(random.randint(0, 9)) for _ in range(n * n)]
-        b = [float(random.randint(0, 9)) for _ in range(n * n)]
+        # Generate random matrices
+        a = np.array([float(random.randint(0, 9)) for _ in range(n * n)])
+        b = np.array([float(random.randint(0, 9)) for _ in range(n * n)])
+
+        a = a.reshape(n, n)  # make sure arrays are n x n
+        b = b.reshape(n, n)
 
         start = time.time()
         for _ in range(100000):
-            mult(n, n, n, a, b, result)
+            np.matmul(a, b, out=result)
         end = time.time()
 
         data.append(end - start)
