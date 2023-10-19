@@ -11,6 +11,31 @@ int main(int argc, char *argv[])
     printf("Timing 100 trials of 100,000 matrix multiplications\n");
     printf("Matrix size: 5x5; times are summed and averaged\n");
 
+    // testing linear algebra function:
+    printf("Testing linear algebra function with identity times [[1, 2], [3, 4]]:\n");
+    double *f = (double *)malloc(4 * sizeof(double));
+    double *g = (double *)malloc(4 * sizeof(double));
+    double *h = (double *)malloc(4 * sizeof(double));
+
+    // assign identity
+    f[0] = 1;
+    f[1] = 0;
+    f[2] = 0;
+    f[3] = 1;
+
+    // assign matrix g
+    for (int i = 1; i < 5; i++)
+    {
+        g[i-1] = i;
+    }
+
+    printf("Matrix h:\n");
+    mult(2, 2, 2, f, g, h);
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%lf\n", h[i]);
+    }
+
     clock_t start, end;
     double time;
 
